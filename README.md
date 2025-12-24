@@ -86,6 +86,8 @@ eSPI clock output from the PCH to slave device
 |:---|:---|:---|
 |**PCH 傳給 Slave**|下降沿 (Falling Edge)|上升沿 (Rising Edge)|
 |**Slave 傳給 PCH**|下降沿 (Falling Edge)|下降沿 (Falling Edge)|
+<img width="667" height="119" alt="image" src="https://github.com/user-attachments/assets/52276ec0-0369-4555-a9f8-7fd84d4570f5" />
+
 
 
 
