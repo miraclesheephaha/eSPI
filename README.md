@@ -93,7 +93,7 @@ eSPI 協議強制要求數據傳輸的對齊：
 eStandard Alignment  
 * 所有 Transaction 必須為 **8-bit (1 Byte)** 的倍數。
 * 系統不支持非字節對齊 (Non-byte aligned) 的傳輸。
-Bus Mode vs Clocks per Byte  
+Bus Mode vs Clocks per Byte
 * **Single Mode (x1):** 8 clocks per byte.
 * **Dual Mode (x2):** 4 clocks per byte.
 * **Quad Mode (x4):** 2 clocks per byte.
