@@ -134,7 +134,7 @@ The Peripheral channel performs the following Functions:
 * Tunnel all Host to eSPI slave (EC/SIO) debug device accesses: these are the accesses that used to go over the LPC bus. These include various programmable and fixed I/O ranges as well as programmable Memory ranges. The programmable ranges and their enables reside in the PCI Configuration space.
 > 隧道化（Tunneling）所有主機至 eSPI 從屬端（如 EC/SIO）的偵錯裝置存取： 這些是過去透過 LPC 匯流排進行的存取動作，包括各種可程式化與固定範圍的 I/O 位址，以及可程式化的記憶體範圍。這些範圍的設定與啟用開關位於 PCI 配置空間中。
 * Tunnel all accesses from the eSPI slave to the Host. These include Memory Reads and Writes.
-> 隧道化所有從 eSPI 從屬端至主機的存取： 這包括由從屬端發起的記憶體讀取（Memory Reads）與寫入（Memory Writes）。  
+> 隧道化所有從 eSPI 從屬端至主機的存取： 這包括由從屬端發起的記憶體讀取（Memory Reads）與寫入（Memory Writes）。
 **2. Vertual Wire Channel (Channel 1) Overview**  
 eSPI 的 Channel 1 (Virtual Wire Channel，虛擬線路通道) 的運作機制。這是 eSPI 能夠大幅減少主機板走線（Pin Count）的核心原因。
 * Sideband and GPIO Pins: System events and other dedicated signals between the PCH and eSPI slave. These signals are tunneled between the two components over eSPI.
