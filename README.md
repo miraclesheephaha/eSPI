@@ -108,6 +108,15 @@ In case the eSPI link may end up in an undefined state (for example when a CRC e
 當 eSPI 連結陷入 未定義狀態 時（例如：當 PCH 發送 Set_Configuration 指令後，卻收到來自 Slave 的 CRC 錯誤回應），PCH 會發出一個 『頻內重置 (In-Band Reset)』 指令。此指令會將 eSPI 連結重置回 預設配置 狀態，讓控制器能夠重新初始化連結並對 Slave 進行重新設定。  
 
 #### eSPI Channel and Supported Transactions
+|通道|功能|例子|
+|:---|:---|:---|
+|Channel 0|周邊存取 (Peripheral)|傳統 I/O (80 Port), Memory 存取|
+|Channel 1|虛擬線路 (Virtual Wire)|插拔偵測、中斷訊號、電源訊號 (PWR_GD)|
+|Channel 2|頻外通訊 (OOB)|BMC 管理數據、溫度監控|
+|Channel 3|Flash 存取 (Flash)|PCH 與 EC 共享 BIOS ROM|
+
+
+
 <img width="537" height="144" alt="image" src="https://github.com/user-attachments/assets/33cc346c-09ee-495b-a6bc-42c7fa87ec49" />
 
 <img width="694" height="706" alt="image" src="https://github.com/user-attachments/assets/8df89336-0ec2-4182-a343-c1cdf657f1d1" />
