@@ -45,6 +45,7 @@ eSPI 透過通道化 (Channelization) 的設計，讓 PCH (Master) 與 EC (Slave
 | **IO[0:3]** | Bi-dir | 雙向資料線。**IO1** 支援 x2/x4 模式提昇傳輸效率。 |
 | **CS#** | Input | 啟動傳輸的選取訊號。 |
 | **Alert#** | Output | (可選) 實體警告訊號，單一 Slave 下建議改用 **In-band** 模式以節省 GPIO。 |
+
 ### ESPI Clock(O)
 eSPI clock output from the PCH to slave device
 ### ESPI Data Signal(IO)
