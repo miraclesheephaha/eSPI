@@ -77,9 +77,8 @@ eSPI clock output from the PCH to slave device
 1. 選取： PCH 將 CS# 拉低。
 2. 同步： PCH 開始送出 CLK (Clock)。
 3. 傳輸： PCH 與 Slave 透過 IO[0:3] 交換資料。
-4. 結束： PCH 停止 CLK，並將 CS# 拉回高電位。
-(An eSPI transaction consists of a Command phase driven by the master, a TAR phase, and a Response phase driven by the slave.)
-<img width="778" height="211" alt="image" src="https://github.com/user-attachments/assets/941e5011-22e5-438b-8fca-b6c6eb76643d" />
+4. 結束： PCH 停止 CLK，並將 CS# 拉回高電位
+(An eSPI transaction consists of a Command phase driven by the master, a TAR phase, and a Response phase driven by the slav)
 
 
 
