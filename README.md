@@ -34,4 +34,25 @@ eSPI 透過通道化 (Channelization) 的設計，讓 PCH (Master) 與 EC (Slave
 | **Flash 存取** | 各自獨立，接腳多 | MAFS / SAFS 共享，接腳少 |
 | **控制器邏輯** | 單純的狀態機 | MAFCC / SAFCC 複雜封包管理 |
 | **頻外通訊** | 額外的 SMBus 線路 | Out-of-Band Channel 虛擬化 |
-| **訊號切換** | 較長的延遲 | Turn-around Cycle 精確計時 |
+| **訊號切換** | 較長的延遲 | Turn-around Cycle 精確計時 |  
+
+## Signal Description
+### ESPI Clock
+eSPI clock output from the PCH to slave device
+### ESPI Data Signal
+英：ESPI Data Signal 1: Bi-directional pin used to transfer data between the PCH and eSPI slave device.  
+中：這根針腳是 「雙向傳遞資料」 的通道，無論是 PCH 要傳資料給從屬設備（Slave），還是從屬設備要回傳資料給 PCH，都會用到這條線。  
+1. Bi-directional (雙向)： 這代表 IO1 腳位並非固定的「輸入」或「輸出」。在傳輸的過程中，它會根據當下的 方向轉折（Turn-around Cycle） 切換角色：
+* Master 傳給 Slave： PCH 驅動訊號（Output），Slave 接收。
+* Slave 傳給 Master： Slave 驅動訊號（Output），PCH 接收。
+2.Transfer data (傳輸資料)： eSPI 支援多種資料頻寬模式，IO1 的參與程度取決於目前使用的 Bus Mode：
+* Single I/O Mode (x1)： 只有 IO0 傳資料，IO1 主要是輔助角色或閒置。
+* Dual I/O Mode (x2)： 使用 IO0 和 IO1 同時傳輸（速度翻倍）。
+* Quad I/O Mode (x4)： 使用 IO0, IO1, IO2, IO3 四根線同時傳輸（速度最高）。
+### ESPI Alert
+英：If only a single Slave is connected, the eSPI Compatibility Specification requires that the Slave must operate with in-band Alert# signaling in order to free up the GPIO pin required for the discrete Alert# pin  
+中：當系統中只有一個 eSPI Slave（例如只有一顆 EC）時，不准使用實體線路來傳送 Alert# 訊號，必須改用「虛擬（內建）」的訊號傳輸。
+1. Discrete Alert# pin (實體接腳)： 原本 eSPI 除了主要的資料線和時脈線外，還有一根獨立的 ALRT# 接腳，專門讓 Slave（從屬端）用來主動叫醒 Master（主控端）或是請求注意。
+2. In-band Alert# signaling (頻內訊號)： 這是 eSPI 的黑科技。它不需要那根實體的 ALRT# 接腳，而是直接在原本的 Data Line (IO0) 上，透過特定的電氣特性（例如在時脈停止時拉低資料線）來傳遞警告訊息。
+3. Free up the GPIO pin (釋放 GPIO 接腳)： 既然訊號已經走資料線了，原本預留給 ALRT# 的那根實體接腳就可以省下來，讓 PCH 或 EC 去做別的事（當成一般的 GPIO 使用）。
+
