@@ -28,8 +28,9 @@ eSPI 透過通道化 (Channelization) 的設計，讓 PCH (Master) 與 EC (Slave
 * 機制：eSPI 是半雙工（Half-duplex）通訊，Master 與 Slave 共用資料線。
 * 動作：當 Master 傳完指令後，會釋放資料線控制權，等待 Slave 接手回應。這段「無人驅動」或「切換驅動者」的空檔（通常是 2 個 Clock）就稱為 Turn-around Cycle。
 * 重要性：TAR 確保了兩端不會同時對電路驅動，避免發生訊號碰撞（Bus Contention）。
-功能項目,傳統 LPC 做法,eSPI 做法
-Flash 存取,各自獨立，接腳多,MAFS / SAFS 共享，接腳少
-控制器邏輯,單純的狀態機,MAFCC / SAFCC 複雜封包管理
-頻外通訊,額外的 SMBus 線路,Out-of-Band Channel 虛擬化
-訊號切換,較長的延遲,Turn-around Cycle 精確計時
+|功能項目|傳統 LPC 做法|eSPI 做法|
+|---|---|---|
+|Flash 存取|各自獨立，接腳多|MAFS / SAFS 共享，接腳少|
+|控制器邏輯|單純的狀態機|MAFCC / SAFCC 複雜封包管理|
+|頻外通訊|額外的 SMBus 線路|Out-of-Band Channel 虛擬化|
+|訊號切換|較長的延遲|Turn-around Cycle 精確計時|
