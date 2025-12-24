@@ -13,8 +13,8 @@ eSPI 透過通道化 (Channelization) 的設計，讓 PCH (Master) 與 EC (Slave
   * 運作：EC (Slave) 若需要讀取自己的韌體，必須透過 eSPI 的 Flash Access Channel 向 PCH 發出請求，由 PCH 代為讀取後再傳回 EC。
   * 優點：節省成本，整台機器只需要一顆 Flash 晶片
 2. SAFS (Slave Attached Flash Sharing)
-  * 定義：Flash 晶片實體連接在 Slave (EC) 上。
-  * 運作：PCH 啟動時所需的身分辨識或初始化代碼，需透過 eSPI 向 EC 請求獲取。
+* 定義：Flash 晶片實體連接在 Slave (EC) 上。
+* 運作：PCH 啟動時所需的身分辨識或初始化代碼，需透過 eSPI 向 EC 請求獲取。
 ### Flash Channel Controller (MAFCC vs. SAFCC)
 這是硬體內部的邏輯控制單元，負責處理上述 Sharing 模式的通訊協定：
 * MAFCC (Master Attached Flash Channel Controller)：位於 PCH 端。它負責處理來自 Slave 的「遠端 Flash 存取要求」。它會判斷權限、位址映射，並控制實體 SPI 介面去讀取 Flash。
@@ -51,18 +51,18 @@ eSPI clock output from the PCH to slave device
 英：ESPI Data Signal 1: **Bi-directional** pin used to **transfer data** between the PCH and eSPI slave device.  
 中：這根針腳是 「雙向傳遞資料」 的通道，無論是 PCH 要傳資料給從屬設備（Slave），還是從屬設備要回傳資料給 PCH，都會用到這條線。  
 1. Bi-directional (雙向)： 這代表 IO1 腳位並非固定的「輸入」或「輸出」。在傳輸的過程中，它會根據當下的 方向轉折（Turn-around Cycle） 切換角色：
-  * Master 傳給 Slave： PCH 驅動訊號（Output），Slave 接收。
-  * Slave 傳給 Master： Slave 驅動訊號（Output），PCH 接收。
+* Master 傳給 Slave： PCH 驅動訊號（Output），Slave 接收。
+* Slave 傳給 Master： Slave 驅動訊號（Output），PCH 接收。
 2. Transfer data (傳輸資料)： eSPI 支援多種資料頻寬模式，IO1 的參與程度取決於目前使用的 Bus Mode：
-  * Single I/O Mode (x1)： 只有 IO0 傳資料，IO1 主要是輔助角色或閒置。
-  * Dual I/O Mode (x2)： 使用 IO0 和 IO1 同時傳輸（速度翻倍）。
-  * Quad I/O Mode (x4)： 使用 IO0, IO1, IO2, IO3 四根線同時傳輸（速度最高）。
+* Single I/O Mode (x1)： 只有 IO0 傳資料，IO1 主要是輔助角色或閒置。
+* Dual I/O Mode (x2)： 使用 IO0 和 IO1 同時傳輸（速度翻倍）。
+* Quad I/O Mode (x4)： 使用 IO0, IO1, IO2, IO3 四根線同時傳輸（速度最高）。
 ### ESPI Chip Select(O)
 英：ESPI Chip Select 0: **Driving CS#** signal low to **select eSPI** slave for the transaction.  
 1. Driving CS# signal low (拉低訊號)： 在閒置狀態（Idle）時，CS# 會維持在高電位（High）。當 PCH 要開始跟某個 Slave 講話時，會把這根針腳的電壓拉低到 0V (Low)。這就像是在點名：「嘿！就是你，請準備好接收資料。」
 2. Select eSPI slave (選取從屬端)： 一個 PCH 可能連接多個 Slave（雖然常見是一個，但規範支援多個）。每個 Slave 會有自己獨立的 CS# 線路。
-  * CS0# 被拉低：選中第一個 Slave（通常是 EC）。
-  * CS1# 被拉低：選中第二個 Slave（如果有）。
+* CS0# 被拉低：選中第一個 Slave（通常是 EC）。
+* CS1# 被拉低：選中第二個 Slave（如果有）。
 3. The transaction (傳輸事務/交易)： 代表一次完整的數據交換過程（從下指令到結束）。CS# 必須在整個傳輸過程中全程維持低電位，直到最後一個位元傳完後才會拉回高電位（De-assert）。
 ### ESPI Alert(I)
 英：If only a single Slave is connected, the eSPI Compatibility Specification requires that the Slave must operate with **in-band Alert# signaling** in order to **free up the GPIO pin** required for the **discrete Alert# pin**  
