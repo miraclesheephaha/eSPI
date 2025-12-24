@@ -39,6 +39,7 @@ eSPI 透過通道化 (Channelization) 的設計，讓 PCH (Master) 與 EC (Slave
 ## Signal Description
 ### 🔌 eSPI 介面接腳定義 (Pin Definition)
 > eSPI 透過虛擬化通道，大幅縮減了 PCH 與 EC/BMC 之間的實體接腳需求。
+
 | 訊號 | 類型 | 說明 |
 | :--- | :--- | :--- |
 | **CLK** | Input | 由 PCH 提供的同步時脈。 |
