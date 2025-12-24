@@ -103,6 +103,19 @@ Bus Mode vs Clocks per Byte
 英：There are situations when the slave cannot predict the length of the command packet from the master (PCH). For non-posted transactions, the slave is allowed to respond with a limited number of WAIT states. A WAIT state is a one byte response code. They must be the first set of response bytes from the slave after the TAR cycles.  
 中：在某些情況下，從屬端 (Slave) 無法預知來自對端 (Master/PCH) 指令封包的長度。對於『非即發性交易 (Non-posted transactions)』，從屬端被允許回傳有限數量的 WAIT 狀態 (WAIT states) 作為回應。「WAIT 狀態是一種 1 位元組 (1 Byte) 的回應碼。在周轉週期 (TAR cycles) 結束後，它們必須是從屬端發出的第一組回應位元組。」
 
+#### In-Band Link Reset
+In case the eSPI link may end up in an undefined state (for example when a CRC error is received from the slave in a response to a Set_Configuration command), the PCH issues an In-Band Reset command which resets the eSPI link to the default configuration. This allows the controller to re-initialize the link and reconfigure the slave.  
+當 eSPI 連結陷入 未定義狀態 時（例如：當 PCH 發送 Set_Configuration 指令後，卻收到來自 Slave 的 CRC 錯誤回應），PCH 會發出一個 『頻內重置 (In-Band Reset)』 指令。此指令會將 eSPI 連結重置回 預設配置 狀態，讓控制器能夠重新初始化連結並對 Slave 進行重新設定。  
+
+#### eSPI Channel and Supported Transactions
+<img width="1074" height="288" alt="image" src="https://github.com/user-attachments/assets/33cc346c-09ee-495b-a6bc-42c7fa87ec49" />
+
+<img width="694" height="706" alt="image" src="https://github.com/user-attachments/assets/8df89336-0ec2-4182-a343-c1cdf657f1d1" />
+
+
+
+
+
 
 
 
