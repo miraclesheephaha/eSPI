@@ -9,9 +9,9 @@ eSPI 透過通道化 (Channelization) 的設計，讓 PCH (Master) 與 EC (Slave
 ### Flash Sharing (MAFS vs. SAFS)
 這是 eSPI 最具革命性的功能。過去 BIOS Flash 通常由 PCH 控制，EC Flash 由 EC 控制。現在雙方可以「共享」同一顆 Flash 晶片，分為兩種模式：
 1. MAFS (Master Attached Flash Sharing)
-* 定義：Flash 晶片實體連接在 Master (PCH) 上。
-* 運作：EC (Slave) 若需要讀取自己的韌體，必須透過 eSPI 的 Flash Access Channel 向 PCH 發出請求，由 PCH 代為讀取後再傳回 EC。
-* 優點：節省成本，整台機器只需要一顆 Flash 晶片
+*   定義：Flash 晶片實體連接在 Master (PCH) 上。
+*   運作：EC (Slave) 若需要讀取自己的韌體，必須透過 eSPI 的 Flash Access Channel 向 PCH 發出請求，由 PCH 代為讀取後再傳回 EC。
+*   優點：節省成本，整台機器只需要一顆 Flash 晶片
 2. SAFS (Slave Attached Flash Sharing)
 * 定義：Flash 晶片實體連接在 Slave (EC) 上。
 * 運作：PCH 啟動時所需的身分辨識或初始化代碼，需透過 eSPI 向 EC 請求獲取。
