@@ -108,14 +108,19 @@ In case the eSPI link may end up in an undefined state (for example when a CRC e
 當 eSPI 連結陷入 未定義狀態 時（例如：當 PCH 發送 Set_Configuration 指令後，卻收到來自 Slave 的 CRC 錯誤回應），PCH 會發出一個 『頻內重置 (In-Band Reset)』 指令。此指令會將 eSPI 連結重置回 預設配置 狀態，讓控制器能夠重新初始化連結並對 Slave 進行重新設定。  
 
 #### eSPI Channel and Supported Transactions
+An eSPI channel provides a means to allow multiple independent flows of traffic to share the same physical bus. Refer to the eSPI specification for more detail.  
+Each of the channels has its dedicated resources such as queue and flow control. There is no ordering requirement between traffic from different channels.  
+The number of types of channels supported by a particular eSPI slave is discovered through the GET_CONFIGURATION command issued by the PCH to the eSPI slave 
+during initialization.  
+eSPI 通道提供了一種機制，允許數個獨立的流量在同一組實體匯流排上進行共享。更詳細的資訊請參考 eSPI 規範。  
+每一個通道都擁有其專屬的資源，例如隊列（Queue）與流量控制（Flow Control）。不同通道之間的流量並沒有先後順序的要求。  
+特定 eSPI 從屬端（Slave）所支援的通道類型與數量，是在初始化過程中，由 PCH 對其發送 GET_CONFIGURATION 指令後發掘而得。
 |通道|功能|例子|
 |:---|:---|:---|
 |Channel 0|周邊存取 (Peripheral)|傳統 I/O (80 Port), Memory 存取|
 |Channel 1|虛擬線路 (Virtual Wire)|插拔偵測、中斷訊號、電源訊號 (PWR_GD)|
 |Channel 2|頻外通訊 (OOB)|BMC 管理數據、溫度監控|
 |Channel 3|Flash 存取 (Flash)|PCH 與 EC 共享 BIOS ROM|
-
-
 
 <img width="537" height="144" alt="image" src="https://github.com/user-attachments/assets/33cc346c-09ee-495b-a6bc-42c7fa87ec49" />
 
