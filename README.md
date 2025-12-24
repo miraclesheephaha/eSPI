@@ -91,7 +91,7 @@ eSPI clock output from the PCH to slave device
 ### 📦 資料傳輸單位 (Data Granularity)
 eSPI 協議強制要求數據傳輸的對齊：  
 eStandard Alignment  
-* 所有 Transaction 必須為 **8-bit (1 Byte)** 的倍數。
+* 所有 Transaction 必須為 **8-bit (1 Byte)** 的倍數。(All transactions on eSPI are in eight bit multiples.)
 * 系統不支持非字節對齊 (Non-byte aligned) 的傳輸。  
 
 Bus Mode vs Clocks per Byte
