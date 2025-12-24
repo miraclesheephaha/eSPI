@@ -72,7 +72,7 @@ eSPI clock output from the PCH to slave device
 1. **Discrete Alert# pin** (實體接腳)： 原本 eSPI 除了主要的資料線和時脈線外，還有一根獨立的 ALRT# 接腳，專門讓 Slave（從屬端）用來主動叫醒 Master（主控端）或是請求注意。
 2. **In-band Alert# signaling** (頻內訊號)： 這是 eSPI 的黑科技。它不需要那根實體的 ALRT# 接腳，而是直接在原本的 Data Line (IO0) 上，透過特定的電氣特性（例如在時脈停止時拉低資料線）來傳遞警告訊息。
 3. **Free up the GPIO pin** (釋放 GPIO 接腳)： 既然訊號已經走資料線了，原本預留給 ALRT# 的那根實體接腳就可以省下來，讓 PCH 或 EC 去做別的事（當成一般的 GPIO 使用）。
-### eSPI 傳輸的標準時序
+#### eSPI 傳輸的標準時序
 當 PCH 要發起一個動作時，硬體上的動作順序如下：
 1. 選取： PCH 將 CS# 拉低。
 2. 同步： PCH 開始送出 CLK (Clock)。
