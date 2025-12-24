@@ -141,6 +141,7 @@ eSPI 的 Channel 1 (Virtual Wire Channel，虛擬線路通道) 的運作機制�
 > 側頻與 GPIO 接腳（Sideband and GPIO Pins）： 處理 PCH 與 eSPI 從屬端（Slave）之間的系統事件及其他專屬訊號。這些訊號透過 eSPI 隧道化（Tunneled）技術在兩個組件之間傳輸。
 * Serial IRQ Interrupts: Interrupts are tunneled from the eSPI slave to the PCH. Both edge and triggered interrupts are supported.
 > 串列 IRQ 中斷（Serial IRQ Interrupts）： 中斷訊號由 eSPI 從屬端隧道化傳輸至 PCH。支援「邊緣觸發（Edge）」與「準位觸發（Level-triggered）」兩種中斷模式。
+
 🔍 深度解析：虛擬化帶來的變革
 對於 BIOS 與硬體工程師來說，這個通道的關鍵在於**「封包化」**。  
 1. 什麼是「隧道化（Tunneling）」？
