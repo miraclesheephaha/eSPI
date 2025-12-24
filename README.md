@@ -135,7 +135,28 @@ The Peripheral channel performs the following Functions:
 > 隧道化（Tunneling）所有主機至 eSPI 從屬端（如 EC/SIO）的偵錯裝置存取： 這些是過去透過 LPC 匯流排進行的存取動作，包括各種可程式化與固定範圍的 I/O 位址，以及可程式化的記憶體範圍。這些範圍的設定與啟用開關位於 PCI 配置空間中。
 * Tunnel all accesses from the eSPI slave to the Host. These include Memory Reads and Writes.
 > 隧道化所有從 eSPI 從屬端至主機的存取： 這包括由從屬端發起的記憶體讀取（Memory Reads）與寫入（Memory Writes）。
-
+2. Vertual Wire Channel (Channel 1) Overview
+eSPI 的 Channel 1 (Virtual Wire Channel，虛擬線路通道) 的運作機制。這是 eSPI 能夠大幅減少主機板走線（Pin Count）的核心原因。
+* Sideband and GPIO Pins: System events and other dedicated signals between the PCH and eSPI slave. These signals are tunneled between the two components over eSPI.
+> 側頻與 GPIO 接腳（Sideband and GPIO Pins）： 處理 PCH 與 eSPI 從屬端（Slave）之間的系統事件及其他專屬訊號。這些訊號透過 eSPI 隧道化（Tunneled）技術在兩個組件之間傳輸。
+* Serial IRQ Interrupts: Interrupts are tunneled from the eSPI slave to the PCH. Both edge and triggered interrupts are supported.
+> 串列 IRQ 中斷（Serial IRQ Interrupts）： 中斷訊號由 eSPI 從屬端隧道化傳輸至 PCH。支援「邊緣觸發（Edge）」與「準位觸發（Level-triggered）」兩種中斷模式。
+🔍 深度解析：虛擬化帶來的變革
+對於 BIOS 與硬體工程師來說，這個通道的關鍵在於**「封包化」**。  
+1. 什麼是「隧道化（Tunneling）」？
+在傳統的 LPC 時代，如果你需要傳送一個「電源鍵按下」或「電池充滿」的訊號，你必須在 PCH 和 EC 之間拉一根實體的電線（Sideband Pin）。  
+* eSPI 的作法： 它把這些電訊號的「高/低電位」狀態轉化成一個數位封包（Message），直接走 eSPI 的資料線。  
+* 結果： 硬體上不需要實體線路，但邏輯上 PCH 覺得它好像還是接到了一根真實的接腳。  
+2. 常見的虛擬訊號 (Virtual Wire Groups)
+BIOS 工程師在設定時，通常會遇到這類訊號被打包成不同的 Index：  
+* 系統狀態： 如 SLP_S3# (睡眠狀態)、PLTRST# (平台重置)。  
+* 電源事件： 如 SMI#、SCI#、PME#。  
+3. 串列 IRQ (Interrupts) 的整合
+* 背景： 以前的設備（如鍵盤、滑鼠）發出中斷請求時，需要透過 SERIRQ 協定或獨立中斷線。  
+* eSPI 做法： 現在全部整合進 Channel 1。當 EC 需要告訴 CPU「有人動了滑鼠」時，它會發送一個虛擬線路封包，PCH 收到後會解析出這是哪個 IRQ（例如 IRQ1 或 IRQ12），再轉交給處理器。  
+* 觸發模式：  
+> * Edge (邊緣觸發)： 訊號從低變高或從高變低時觸發。  
+> * Level (準位觸發)： 只要訊號維持在某個電位就持續觸發。  
 
 
 
