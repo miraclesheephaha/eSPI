@@ -98,6 +98,9 @@ Bus Mode vs Clocks per Byte
 * **Single Mode (x1):** 8 clocks per byte.
 * **Dual Mode (x2):** 4 clocks per byte.
 * **Quad Mode (x4):** 2 clocks per byte.
+#### WAIT State from eSPI Slave
+英：There are situations when the slave cannot predict the length of the command packet from the master (PCH). For non-posted transactions, the slave is allowed to respond with a limited number of WAIT states. A WAIT state is a one byte response code. They must be the first set of response bytes from the slave after the TAR cycles.  
+中：在某些情況下，從屬端 (Slave) 無法預知來自對端 (Master/PCH) 指令封包的長度。對於『非即發性交易 (Non-posted transactions)』，從屬端被允許回傳有限數量的 WAIT 狀態 (WAIT states) 作為回應。「WAIT 狀態是一種 1 位元組 (1 Byte) 的回應碼。在周轉週期 (TAR cycles) 結束後，它們必須是從屬端發出的第一組回應位元組。」
 
 
 
