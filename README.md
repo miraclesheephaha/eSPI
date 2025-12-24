@@ -82,6 +82,11 @@ eSPI clock output from the PCH to slave device
 (An eSPI transaction consists of a Command phase driven by the master, a TAR phase, and a Response phase driven by the slave)
 <img width="767" height="215" alt="image" src="https://github.com/user-attachments/assets/1cbf6479-7f8d-4772-9e4a-bfbfe3ad098e" />
 
+| 動作方向 | 驅動資料 (Drive) | 取樣資料 (Sample) |
+|:---|:---|:---|
+|**PCH 傳給 Slave**|下降沿 (Falling Edge)|上升沿 (Rising Edge)|
+|**Slave 傳給 PCH**|下降沿 (Falling Edge)|下降沿 (Falling Edge)|
+
 
 
 
