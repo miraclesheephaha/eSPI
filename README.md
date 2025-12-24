@@ -80,6 +80,8 @@ eSPI clock output from the PCH to slave device
 4. 結束： PCH 停止 CLK，並將 CS# 拉回高電位
 
 (An eSPI transaction consists of a Command phase driven by the master, a TAR phase, and a Response phase driven by the slave)
+<img width="767" height="215" alt="image" src="https://github.com/user-attachments/assets/1cbf6479-7f8d-4772-9e4a-bfbfe3ad098e" />
+
 
 
 
