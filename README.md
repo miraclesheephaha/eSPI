@@ -1,4 +1,5 @@
 # eSPI  Enhanced Serial Peripheral Interface
+eSPI (Enhanced Serial Peripheral Interface) 是電腦主機板上的「神經總線」，它主要負責連接 PCH (主控端/南橋) 與 EC/BMC (嵌入式控制器)，處理那些「電腦開機前」以及「系統運行中」的瑣碎管理任務。  
 eSPI 透過通道化 (Channelization) 的設計，讓 PCH (Master) 與 EC (Slave) 能在極少的接腳下完成  
 <img width="651" height="260" alt="image" src="https://github.com/user-attachments/assets/7800a0f1-3f56-4be6-be1d-2c038e3d085c"/>  
 ### EC
