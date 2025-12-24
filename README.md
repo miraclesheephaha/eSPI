@@ -89,14 +89,14 @@ eSPI clock output from the PCH to slave device
 
 **The serial clock must be low at the assertion edge of the CS# while ESPI_RESET# has been de-asserte.** The first data is driven out from the PCH while the serial clock is still low and sampled on the rising edge of the clock by the slave. **Subsequent data is driven on the falling edge of the clock from the PCH and sampled on the rising edge of the clock by the slave.** Data from the slave is driven out on the falling edge of the clock and is sampled on a falling edge of the clock by the PCH.  
 ### 📦 資料傳輸單位 (Data Granularity)
-eSPI 協議強制要求數據傳輸的對齊：
-Standard Alignment
-    * 所有 Transaction 必須為 **8-bit (1 Byte)** 的倍數。
-    * 系統不支持非字節對齊 (Non-byte aligned) 的傳輸。
-Bus Mode vs Clocks per Byte
-    * **Single Mode (x1):** 8 clocks per byte.
-    * **Dual Mode (x2):** 4 clocks per byte.
-    * **Quad Mode (x4):** 2 clocks per byte.
+eSPI 協議強制要求數據傳輸的對齊：  
+eStandard Alignment  
+* 所有 Transaction 必須為 **8-bit (1 Byte)** 的倍數。
+* 系統不支持非字節對齊 (Non-byte aligned) 的傳輸。
+Bus Mode vs Clocks per Byte  
+* **Single Mode (x1):** 8 clocks per byte.
+* **Dual Mode (x2):** 4 clocks per byte.
+* **Quad Mode (x4):** 2 clocks per byte.
 
 
 
