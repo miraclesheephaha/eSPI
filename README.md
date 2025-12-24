@@ -126,6 +126,15 @@ eSPI 通道提供了一種機制，允許數個獨立的流量在同一組實體
 
 <img width="694" height="706" alt="image" src="https://github.com/user-attachments/assets/8df89336-0ec2-4182-a343-c1cdf657f1d1" />
 
+1. Peripheral Channel (Channel 0) Overview
+eSPI 的 Channel 0 (Peripheral Channel，周邊通道) 的具體功能。它是為了讓 eSPI 能夠 100% 兼容舊有的 LPC 匯流排 而設計的。
+The Peripheral channel performs the following Functions:  
+* Target for PCI Device D31:F0: The eSPI controller duplicates the legacy LPC PCI Configuration space registers. These registers are mostly accessed via the BIOS, though some are accessed via the OS as well.
+> 作為 PCI 裝置 D31:F0 的目標： eSPI 控制器複製了傳統 LPC 的 PCI 配置空間暫存器（PCI Configuration Space Registers）。這些暫存器大部分由 BIOS 存取，部分也會由作業系統（OS）存取。(ACPI，UART等都是通过Peripheral Channel传输数据(0x0080,0x0060/0x0064))
+* Tunnel all Host to eSPI slave (EC/SIO) debug device accesses: these are the accesses that used to go over the LPC bus. These include various programmable and fixed I/O ranges as well as programmable Memory ranges. The programmable ranges and their enables reside in the PCI Configuration space.
+> 隧道化（Tunneling）所有主機至 eSPI 從屬端（如 EC/SIO）的偵錯裝置存取： 這些是過去透過 LPC 匯流排進行的存取動作，包括各種可程式化與固定範圍的 I/O 位址，以及可程式化的記憶體範圍。這些範圍的設定與啟用開關位於 PCI 配置空間中。
+* Tunnel all accesses from the eSPI slave to the Host. These include Memory Reads and Writes.
+> 隧道化所有從 eSPI 從屬端至主機的存取： 這包括由從屬端發起的記憶體讀取（Memory Reads）與寫入（Memory Writes）。
 
 
 
