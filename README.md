@@ -87,7 +87,8 @@ eSPI clock output from the PCH to slave device
 |**PCH 傳給 Slave**|下降沿 (Falling Edge)|上升沿 (Rising Edge)|
 |**Slave 傳給 PCH**|下降沿 (Falling Edge)|下降沿 (Falling Edge)|
 
-<img width="665" height="116" alt="image" src="https://github.com/user-attachments/assets/bf1c7396-2487-429a-b49d-f4aeb9350703" />
+**The serial clock must be low at the assertion edge of the CS# while ESPI_RESET# has been de-asserte.** The first data is driven out from the PCH while the serial clock is still low and sampled on the rising edge of the clock by the slave. **Subsequent data is driven on the falling edge of the clock from the PCH and sampled on the rising edge of the clock by the slave.** Data from the slave is driven out on the falling edge of the clock and is sampled on a falling edge of the clock by the PCH.
+
 
 
 
