@@ -161,8 +161,13 @@ BIOS 工程師在設定時，通常會遇到這類訊號被打包成不同的 In
 > * Level (準位觸發)： 只要訊號維持在某個電位就持續觸發。
 
 **3. Out-of-Band Channel (Channel 2) Overview**  
-
-
+Channel2負責管理層級得數據交換，整合了原本散落在SMBus的功能：  
+* Tunnel MCTP Packets between the Intel ME and eSPI slave device: The Intel ME communicates MCTP messages to/from the device by embedding those packets over the eSPI protocol. This eliminates the SMBus connection between the PCH and the slave device which was used to communicate the MCTP messages in prior PCH generations. The eSPI controller simply acts as a message transport and forwards the packets between the Intel ME and eSPI device.
+> 在 Intel ME 與 eSPI 從屬端之間隧道化傳輸 MCTP 封包： Intel ME 藉由將 MCTP (管理組件傳輸協定) 訊息嵌入 eSPI 協定中，實現與裝置間的通訊。這取代了舊世代 PCH 用來傳輸 MCTP 訊息的 SMBus 連線。eSPI 控制器在此僅充當訊息傳輸媒介，負責在 Intel ME 與 eSPI 裝置間轉發封包。
+* Tunnel PCH Temperature Data to the eSPI slave: The eSPI controller stores the PCH temperature data internally and sends it to the slave using a posted OOB message when a request is made to a specific destination address.
+> 隧道化傳輸 PCH 溫度數據至 eSPI 從屬端： eSPI 控制器會將 PCH 溫度數據儲存在內部；當收到針對特定目標位址的請求時，會透過「即發性 (Posted)」OOB 訊息將數據發送給從屬端。
+* Tunnel PCH RTC Time and Date Bytes to the eSPI slave: the eSPI controller captures this data internally at periodic intervals from the PCH RTC controller and sends it to the slave device using a posted OOB message when a request is made to a specific destination address.
+> 隧道化傳輸 PCH RTC 時間與日期位元組至 eSPI 從屬端： eSPI 控制器會定期從 PCH RTC 控制器內部擷取時間與日期數據；當收到針對特定目標位址的請求時，會透過「即發性 (Posted)」OOB 訊息將其發送給從屬端。
 
 
 
