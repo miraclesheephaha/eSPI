@@ -169,7 +169,8 @@ Channel2負責管理層級得數據交換，整合了原本散落在SMBus的功�
 * Tunnel PCH RTC Time and Date Bytes to the eSPI slave: the eSPI controller captures this data internally at periodic intervals from the PCH RTC controller and sends it to the slave device using a posted OOB message when a request is made to a specific destination address.
 > 隧道化傳輸 PCH RTC 時間與日期位元組至 eSPI 從屬端： eSPI 控制器會定期從 PCH RTC 控制器內部擷取時間與日期數據；當收到針對特定目標位址的請求時，會透過「即發性 (Posted)」OOB 訊息將其發送給從屬端。
 
-**4. Flash Access Channel(Channel 3) Overview**  
+**4. Flash Access Channel(Channel 3) Overview**    
+Channel3它定義了 PCH 與從屬設備（EC/BMC）如何「共享」同一個 BIOS ROM。  
 * Master Attached Flash: this is the configuration where the flash device is directly attached to the PCH via the PCH’s SPI bus. This configuration allows the eSPI device to access the flash device attached to the PCH through a set of flash access commands sent to the eSPI master controller in the PCH. These commands are routed to the flash controller and the return data is sent back to the eSPI device.
 > 主控端掛載快閃記憶體 (Master Attached Flash, MAFS)： 在此配置下，Flash 裝置經由 PCH 的 SPI 匯流排直接連接至 PCH。此配置允許 eSPI 裝置（如 EC）透過發送一組「快閃記憶體存取指令」給 PCH 內部的 eSPI 主控制器，來存取連接在 PCH 上的 Flash。這些指令會被轉發至 Flash 控制器，並將回傳的資料送回給 eSPI 裝置。
 * Slave Attached Flash: In this configuration, the flash device is attached to the BMC/EC/SIO. All PCH flash accesses are routed over eSPI to the BMC/EC/SIO which performs the requested flash operation and returns a completion back to the PCH.
