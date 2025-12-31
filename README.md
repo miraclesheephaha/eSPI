@@ -163,6 +163,8 @@ BIOS 工程師在設定時，通常會遇到這類訊號被打包成不同的 In
 <img width="682" height="251" alt="image" src="https://github.com/user-attachments/assets/19e9dbfc-995e-4d47-9a3e-fdf60e82de97" />  
 
 > 虛擬電線通道（Virtual Wire channel）用於溝通邊帶引腳（Sideband pins）或 GPIO 的狀態，這些狀態會透過 eSPI 以「帶內訊息（In-band messages）」的方式進行傳送。序列中斷（Serial IRQ interrupts）也是透過此通道以帶內訊息形式進行溝通。**命令階段（Command phase）由一個命令操作碼（Command Opcode）、虛擬電線封包（Virtual Wire Packet）以及一個 CRC 組成**虛擬電線封包以「虛擬電線計數（Virtual Wire Count）」作為標頭位元組（Header byte），該計數指示了封包中所包含的虛擬電線組（Groups）數量。隨後則跟隨一組或多組虛擬電線組。每一組虛擬電線組由 2 個位元組組成，分別為「虛擬電線索引（Index）」與「虛擬電線數據（Data）」。單個封包中允許發送多組虛擬電線組，上限為 64 組。
+深度解析：什麼是「帶內訊息 (In-band)」？
+> 在傳統設計中，如果你要傳送 SMI# 訊號，你必須在 PCH 與 EC 之間拉一根實體的銅線，這叫 Sideband (邊帶)。在 eSPI 中，這些訊號不再有專屬的電線，而是被打包進 eSPI 自己的資料流裡。這就像是原本每家每戶都有自己的專屬水管（Sideband），現在全部改用同一個大型公共水箱（eSPI Bus）來配送，這就叫做 In-band (帶內)。
 
 
 **3. Out-of-Band Channel (Channel 2) Overview**  
