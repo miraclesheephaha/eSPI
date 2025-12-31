@@ -185,6 +185,18 @@ Channel3它定義了 PCH 與從屬設備（EC/BMC）如何「共享」同一個 
 * Slave Attached Flash: In this configuration, the flash device is attached to the BMC/EC/SIO. All PCH flash accesses are routed over eSPI to the BMC/EC/SIO which performs the requested flash operation and returns a completion back to the PCH.
 > 從屬端掛載快閃記憶體 (Slave Attached Flash, SAFS)： 在此配置下，Flash 裝置是連接在 BMC/EC/SIO（從屬端）上。所有來自 PCH 的 Flash 存取請求都會經由 eSPI 路由至 BMC/EC/SIO，由後者執行所要求的快閃記憶體操作，並將完成訊息（Completion）回傳給 PCH。
 
+<img width="609" height="678" alt="image" src="https://github.com/user-attachments/assets/d572144a-3be7-4591-b16e-94f81ad12f5b" />
+
+A. 獨立 SPI 介面 (Independent SPI) — 最常見  
+構造： PCH 有專門的 SPI 腳位接 Flash，另外有專門的 eSPI 腳位接 EC。  
+運作： 這是邏輯上的共享。EC 想讀 Flash 時，必須發送 eSPI 封包給 PCH，PCH 再去轉動自己的 SPI 訊號幫 EC 拿資料。  
+
+B. 共用 SPI/eSPI 介面 (Shared SPI/eSPI) — 腳位精簡  
+構造： 這是 eSPI 規格中較進階的用法。PCH 的某些腳位在開機初期是 SPI 模式，開機後轉為 eSPI 模式，或是 Flash 乾脆就掛在 eSPI 的資料線上。  
+運作： 這需要更複雜的時序控制（Time-multiplexing），但在極度追求空間的小型設備（如手機或極窄邊框筆電）中會見到。  
+
+
+
 
 
 
