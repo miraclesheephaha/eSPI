@@ -167,6 +167,7 @@ BIOS 工程師在設定時，通常會遇到這類訊號被打包成不同的 In
 深度解析：什麼是「帶內訊息 (In-band)」？
 > 在傳統設計中，如果你要傳送 SMI# 訊號，你必須在 PCH 與 EC 之間拉一根實體的銅線，這叫 Sideband (邊帶)。在 eSPI 中，這些訊號不再有專屬的電線，而是被打包進 eSPI 自己的資料流裡。這就像是原本每家每戶都有自己的專屬水管（Sideband），現在全部改用同一個大型公共水箱（eSPI Bus）來配送，這就叫做 In-band (帶內)。
 
+<img width="709" height="436" alt="image" src="https://github.com/user-attachments/assets/e24df9ba-a8cc-42a5-9f23-c62e41eecf01" />
 
 **3. Out-of-Band Channel (Channel 2) Overview**  
 Channel2負責管理層級得數據交換，整合了原本散落在SMBus的功能：  
