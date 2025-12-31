@@ -161,7 +161,8 @@ BIOS 工程師在設定時，通常會遇到這類訊號被打包成不同的 In
 > * Level (準位觸發)： 只要訊號維持在某個電位就持續觸發。
 
 <img width="682" height="251" alt="image" src="https://github.com/user-attachments/assets/19e9dbfc-995e-4d47-9a3e-fdf60e82de97" />  
-> 虛擬電線通道（Virtual Wire channel）用於溝通邊帶引腳（Sideband pins）或 GPIO 的狀態，這些狀態會透過 eSPI 以「帶內訊息（In-band messages）」的方式進行傳送。序列中斷（Serial IRQ interrupts）也是透過此通道以帶內訊息形式進行溝通。**命令階段（Command phase）由一個命令操作碼（Command Opcode）、虛擬電線封包（Virtual Wire Packet）以及一個 CRC 組成。**虛擬電線封包以「虛擬電線計數（Virtual Wire Count）」作為標頭位元組（Header byte），該計數指示了封包中所包含的虛擬電線組（Groups）數量。隨後則跟隨一組或多組虛擬電線組。每一組虛擬電線組由 2 個位元組組成，分別為「虛擬電線索引（Index）」與「虛擬電線數據（Data）」。單個封包中允許發送多組虛擬電線組，上限為 64 組。
+
+> 虛擬電線通道（Virtual Wire channel）用於溝通邊帶引腳（Sideband pins）或 GPIO 的狀態，這些狀態會透過 eSPI 以「帶內訊息（In-band messages）」的方式進行傳送。序列中斷（Serial IRQ interrupts）也是透過此通道以帶內訊息形式進行溝通。**命令階段（Command phase）由一個命令操作碼（Command Opcode）、虛擬電線封包（Virtual Wire Packet）以及一個 CRC 組成**虛擬電線封包以「虛擬電線計數（Virtual Wire Count）」作為標頭位元組（Header byte），該計數指示了封包中所包含的虛擬電線組（Groups）數量。隨後則跟隨一組或多組虛擬電線組。每一組虛擬電線組由 2 個位元組組成，分別為「虛擬電線索引（Index）」與「虛擬電線數據（Data）」。單個封包中允許發送多組虛擬電線組，上限為 64 組。
 
 
 **3. Out-of-Band Channel (Channel 2) Overview**  
