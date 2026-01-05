@@ -196,6 +196,10 @@ B. 共用 SPI/eSPI 介面 (Shared SPI/eSPI) — 腳位精簡
 運作： 這需要更複雜的時序控制（Time-multiplexing），但在極度追求空間的小型設備（如手機或極窄邊框筆電）中會見到。  
 
 
+[UEFI SHELL PACKAGE調用](https://blog.csdn.net/tody_guo/article/details/1468973151
+
+
+
 
 
 
