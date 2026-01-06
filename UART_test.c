@@ -44,7 +44,7 @@ UefiMain(IN EFI_HANDLE ImageHandle,IN EFI_SYSTEM_TABLE *SystemTable){
     }
 
     gBS->Stall(2000000);
-    IoWrite8(0x80,0x00);
+    IoWrite8(0x80,0xCC);
 
     gBS->Stall(2000000);
     IoWrite8(0X80,IoRead8(0x3F8));
@@ -55,8 +55,14 @@ UefiMain(IN EFI_HANDLE ImageHandle,IN EFI_SYSTEM_TABLE *SystemTable){
     gBS->Stall(2000000);
     IoWrite8(0X80,IoRead8(0x3F9));
 
+    gBS->Stall(2000000);
+    IoWrite8(0x80,0xCC);
+    
+    gBS->Stall(2000000);
+    IoWrite8(0X80,IoRead8(0x3FA));
+
     gBS->Stall (2000000);
-    IoWrite8(0x80, 0xBB);
+    IoWrite8(0x80, 0xAA);
 
     gBS->Stall (2000000);
     IoWrite8(0x80, IoRead8(0x3FC));
@@ -67,4 +73,5 @@ UefiMain(IN EFI_HANDLE ImageHandle,IN EFI_SYSTEM_TABLE *SystemTable){
     //Disable by writing 0xAA once
     IoWrite8(IndexPort,0xAA);
     return EFI_SUCCESS;
+
 }
