@@ -37,7 +37,7 @@ EFI_STATUS
 
 //確保跨編譯器的函式呼叫規範一致性
 EFIAPI
-init_serial(port){
+init_serial(UINTN port){
     IoWrite8(port+1,0x00);
     IoWrite8(port+3,0x80);
     IoWrite8(port+0,0x01);
@@ -51,7 +51,7 @@ init_serial(port){
 EFI_STATUS
 EFIAPI
 UefiMain(IN EFI_HANDLE ImageHandle,IN EFI_SYSTEM_TABLE *SystemTable){
-    CHAR8 Test[]="UART"
+    CHAR8 Test[]="UART";
     
     IoWrite8(IndexPort,0xA5);
     IoWrite8(IndexPort,0xA5);
@@ -72,4 +72,5 @@ UefiMain(IN EFI_HANDLE ImageHandle,IN EFI_SYSTEM_TABLE *SystemTable){
 
     IoWrite8(IndexPort,0xAA);
     return EFI_SUCCESS;
+
 }
